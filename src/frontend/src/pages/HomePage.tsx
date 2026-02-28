@@ -6,8 +6,8 @@ import {
   useGenreTracks,
   useNewReleases,
 } from "@/hooks/useQueries";
-import { GENRES } from "@/lib/jamendo";
 import { cn } from "@/lib/utils";
+import { GENRES } from "@/lib/youtube";
 import { motion } from "motion/react";
 import { useState } from "react";
 
@@ -118,6 +118,8 @@ export function HomePage() {
                 />
               ))}
             </div>
+          ) : genreTracks.isError ? (
+            <ErrorState message="Couldn't load tracks for this genre" />
           ) : (
             <EmptyState message="No tracks found for this genre" />
           )}

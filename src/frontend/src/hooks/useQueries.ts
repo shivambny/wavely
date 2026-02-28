@@ -4,19 +4,19 @@ import {
   fetchFeaturedTracks,
   fetchNewReleases,
   searchTracks,
-} from "@/lib/jamendo";
+} from "@/lib/youtube";
 import type { Track } from "@/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useActor } from "./useActor";
 
-// ─── Jamendo Queries ────────────────────────────────────────────────────────
+// ─── YouTube / Piped Queries ──────────────────────────────────────────────────
 
 export function useFeaturedTracks() {
   return useQuery({
     queryKey: ["featured-tracks"],
     queryFn: fetchFeaturedTracks,
     staleTime: 5 * 60 * 1000,
-    retry: 1,
+    retry: 2,
   });
 }
 
@@ -25,7 +25,7 @@ export function useNewReleases() {
     queryKey: ["new-releases"],
     queryFn: fetchNewReleases,
     staleTime: 5 * 60 * 1000,
-    retry: 1,
+    retry: 2,
   });
 }
 
@@ -35,7 +35,7 @@ export function useGenreTracks(genre: string, enabled = true) {
     queryFn: () => fetchByGenre(genre),
     staleTime: 10 * 60 * 1000,
     enabled: enabled && !!genre,
-    retry: 1,
+    retry: 2,
   });
 }
 
@@ -45,7 +45,7 @@ export function useSearchTracks(query: string) {
     queryFn: () => searchTracks(query),
     staleTime: 2 * 60 * 1000,
     enabled: query.trim().length > 0,
-    retry: 1,
+    retry: 2,
   });
 }
 

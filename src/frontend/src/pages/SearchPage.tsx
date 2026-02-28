@@ -1,8 +1,8 @@
 import { TrackCard } from "@/components/track/TrackCard";
 import { GridSkeleton } from "@/components/track/TrackSkeleton";
 import { useGenreTracks, useSearchTracks } from "@/hooks/useQueries";
-import { GENRES } from "@/lib/jamendo";
 import { cn } from "@/lib/utils";
+import { GENRES } from "@/lib/youtube";
 import { Search, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
