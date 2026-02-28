@@ -1,0 +1,407 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/Sora-Variable.woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* === WAVELY DARK THEME (primary — always dark) === */
+    --background: 0.11 0.015 270;
+    --foreground: 0.96 0.008 270;
+
+    --card: 0.15 0.018 270;
+    --card-foreground: 0.96 0.008 270;
+
+    --popover: 0.17 0.022 270;
+    --popover-foreground: 0.96 0.008 270;
+
+    --primary: 0.62 0.22 295;
+    --primary-foreground: 0.98 0.005 270;
+
+    --secondary: 0.19 0.025 270;
+    --secondary-foreground: 0.88 0.01 270;
+
+    --muted: 0.18 0.02 270;
+    --muted-foreground: 0.55 0.025 270;
+
+    --accent: 0.65 0.28 330;
+    --accent-foreground: 0.98 0.005 270;
+
+    --destructive: 0.6 0.22 15;
+    --destructive-foreground: 0.98 0.005 270;
+
+    --border: 0.28 0.03 270;
+    --input: 0.22 0.025 270;
+    --ring: 0.62 0.22 295;
+
+    --chart-1: 0.62 0.22 295;
+    --chart-2: 0.65 0.28 330;
+    --chart-3: 0.55 0.2 250;
+    --chart-4: 0.7 0.18 200;
+    --chart-5: 0.68 0.25 60;
+
+    --sidebar: 0.13 0.018 270;
+    --sidebar-foreground: 0.96 0.008 270;
+    --sidebar-primary: 0.62 0.22 295;
+    --sidebar-primary-foreground: 0.98 0.005 270;
+    --sidebar-accent: 0.19 0.025 270;
+    --sidebar-accent-foreground: 0.88 0.01 270;
+    --sidebar-border: 0.22 0.025 270;
+    --sidebar-ring: 0.62 0.22 295;
+
+    /* Custom Wavely tokens */
+    --violet: 0.62 0.22 295;
+    --pink: 0.65 0.28 330;
+    --violet-dim: 0.45 0.18 295;
+    --pink-dim: 0.48 0.22 330;
+    --surface-glass: 0.18 0.022 270;
+    --player-bg: 0.10 0.018 272;
+    --glow-violet: oklch(0.62 0.22 295 / 0.35);
+    --glow-pink: oklch(0.65 0.28 330 / 0.35);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Sora", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: oklch(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.28 0.04 270);
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--violet-dim));
+  }
+}
+
+@layer utilities {
+  /* ── Typography ─────────────────────────────── */
+  .gradient-text {
+    background: linear-gradient(
+      125deg,
+      oklch(var(--violet)) 0%,
+      oklch(var(--pink)) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-soft {
+    background: linear-gradient(
+      125deg,
+      oklch(0.82 0.12 295) 0%,
+      oklch(0.85 0.15 330) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Surfaces / Glass ───────────────────────── */
+  .glass-card {
+    background: oklch(var(--surface-glass) / 0.65);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid oklch(var(--border) / 0.6);
+    box-shadow:
+      0 1px 0 0 oklch(1 0 0 / 0.04) inset,
+      0 4px 20px 0 oklch(0 0 0 / 0.35);
+  }
+
+  .glass-card-hover {
+    transition:
+      background 0.22s ease,
+      border-color 0.22s ease,
+      box-shadow 0.22s ease,
+      transform 0.22s ease;
+  }
+
+  .glass-card-hover:hover {
+    background: oklch(var(--surface-glass) / 0.85);
+    border-color: oklch(var(--violet) / 0.45);
+    box-shadow:
+      0 1px 0 0 oklch(1 0 0 / 0.06) inset,
+      0 0 32px oklch(var(--violet) / 0.18),
+      0 8px 32px 0 oklch(0 0 0 / 0.4);
+    transform: translateY(-2px);
+  }
+
+  /* ── Glows ──────────────────────────────────── */
+  .neon-glow-violet {
+    box-shadow:
+      0 0 20px var(--glow-violet),
+      0 0 40px var(--glow-violet);
+  }
+
+  .neon-glow-pink {
+    box-shadow:
+      0 0 20px var(--glow-pink),
+      0 0 40px var(--glow-pink);
+  }
+
+  /* ── Backgrounds ────────────────────────────── */
+  .bg-gradient-mesh {
+    background:
+      radial-gradient(
+        ellipse 90% 55% at 15% 5%,
+        oklch(var(--violet) / 0.11) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        ellipse 65% 55% at 85% 85%,
+        oklch(var(--pink) / 0.09) 0%,
+        transparent 65%
+      ),
+      oklch(var(--background));
+  }
+
+  /* ── Player bar ─────────────────────────────── */
+  .player-gradient {
+    /* Deep layered bg with left violet / right pink tint */
+    background:
+      linear-gradient(
+        90deg,
+        oklch(var(--violet) / 0.06) 0%,
+        transparent 40%,
+        oklch(var(--pink) / 0.04) 100%
+      ),
+      oklch(var(--player-bg) / 0.97);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    /* Top highlight line to separate from content */
+    border-top: 1px solid oklch(var(--border) / 0.5);
+    /* Inner top glow */
+    box-shadow:
+      0 -1px 0 0 oklch(1 0 0 / 0.05) inset,
+      0 -24px 48px -12px oklch(var(--violet) / 0.12);
+  }
+
+  /* ── Track card ─────────────────────────────── */
+  .track-card-overlay {
+    background: linear-gradient(
+      to top,
+      oklch(0.07 0.022 270 / 0.92) 0%,
+      oklch(0.07 0.022 270 / 0.2) 35%,
+      transparent 60%
+    );
+  }
+
+  /* Radial spotlight behind play button on hover */
+  .track-card-play-spotlight {
+    background: radial-gradient(
+      ellipse 70% 60% at 50% 50%,
+      oklch(0 0 0 / 0.55) 0%,
+      oklch(0 0 0 / 0.2) 70%,
+      transparent 100%
+    );
+  }
+
+  /* Ring for currently-playing card */
+  .track-card-active-ring {
+    box-shadow:
+      0 0 0 2px oklch(var(--violet) / 0.7),
+      0 0 16px oklch(var(--violet) / 0.35);
+  }
+
+  /* ── Sidebar ────────────────────────────────── */
+  .sidebar-active {
+    background: linear-gradient(
+      125deg,
+      oklch(var(--violet) / 0.18) 0%,
+      oklch(var(--pink) / 0.08) 100%
+    );
+    /* Vertical rule accent — not a border stripe hack, it's the nav indicator */
+    box-shadow: inset 3px 0 0 0 oklch(var(--violet));
+    border-radius: 0.75rem;
+  }
+
+  /* ── Buttons ────────────────────────────────── */
+  .btn-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(var(--violet)) 0%,
+      oklch(var(--pink)) 100%
+    );
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .btn-gradient:hover {
+    opacity: 0.88;
+    box-shadow: 0 0 20px oklch(var(--violet) / 0.45);
+  }
+
+  .btn-gradient:active {
+    opacity: 0.75;
+    transform: scale(0.96);
+  }
+
+  /* ── Seek bar fill ──────────────────────────── */
+  .seek-bar-filled {
+    background: linear-gradient(
+      90deg,
+      oklch(var(--violet)) 0%,
+      oklch(var(--pink)) 100%
+    );
+  }
+
+  /* ── Chip / pill ────────────────────────────── */
+  .chip-default {
+    background: oklch(var(--surface-glass) / 0.5);
+    border: 1px solid oklch(var(--border) / 0.5);
+    box-shadow: 0 1px 0 0 oklch(1 0 0 / 0.04) inset;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition:
+      background 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .chip-default:hover {
+    background: oklch(var(--surface-glass) / 0.8);
+    border-color: oklch(var(--border));
+    color: oklch(var(--foreground));
+  }
+
+  /* ── Section header accent ──────────────────── */
+  .section-header-accent {
+    position: relative;
+    padding-left: 0.875rem;
+  }
+
+  .section-header-accent::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 1em;
+    border-radius: 2px;
+    background: linear-gradient(
+      180deg,
+      oklch(var(--violet)) 0%,
+      oklch(var(--pink)) 100%
+    );
+  }
+}
+
+/* ── Range inputs ───────────────────────────────── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: oklch(var(--border) / 0.6);
+  height: 3px;
+  border-radius: 99px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: oklch(1 0 0);
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+  margin-top: -5px;
+  box-shadow:
+    0 0 0 2px oklch(var(--violet) / 0.5),
+    0 2px 6px oklch(0 0 0 / 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  opacity: 0;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb,
+input[type="range"]:focus::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+  box-shadow:
+    0 0 0 3px oklch(var(--violet) / 0.55),
+    0 2px 8px oklch(0 0 0 / 0.5);
+}
+
+input[type="range"]::-moz-range-track {
+  background: oklch(var(--border) / 0.6);
+  height: 3px;
+  border-radius: 99px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: oklch(1 0 0);
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+  border: none;
+  box-shadow:
+    0 0 0 2px oklch(var(--violet) / 0.5),
+    0 2px 6px oklch(0 0 0 / 0.4);
+}
+
+/* Player seek bar — always show thumb, larger hit area */
+.player-seek input[type="range"]::-webkit-slider-thumb {
+  opacity: 1;
+  height: 14px;
+  width: 14px;
+}
+
+.player-seek input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+}
